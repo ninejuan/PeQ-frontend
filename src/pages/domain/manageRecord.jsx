@@ -100,6 +100,22 @@ const ErrorMessage = styled.div`
   margin: 16px 0;
 `;
 
+const EditButton = styled(Button)`
+  background-color: ${Colors.BACKGROUND_FOURTH};
+  margin-right: 8px;
+`;
+
+const EditForm = styled.form`
+  display: grid;
+  grid-template-columns: 100px 1fr auto auto;
+  gap: 16px;
+  align-items: center;
+  background-color: ${Colors.BACKGROUND_FOURTH};
+  padding: 16px;
+  border-radius: 8px;
+  margin-top: 8px;
+`;
+
 const ManageRecord = () => {
   const { domain } = useParams();
   const [records, setRecords] = useState([]);
@@ -108,6 +124,11 @@ const ManageRecord = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [newRecord, setNewRecord] = useState({
     type: "A",
+    value: "",
+  });
+  const [editingRecord, setEditingRecord] = useState(null);
+  const [editForm, setEditForm] = useState({
+    type: "",
     value: "",
   });
 
@@ -201,6 +222,50 @@ const ManageRecord = () => {
     }
   };
 
+  const handleEdit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`${Properties.API_URL}/domain/record`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${Cookies.get("accessToken")}`,
+        },
+        body: JSON.stringify({
+          name: domain,
+          old_type: editingRecord.record_type,
+          type: editForm.type,
+          target: editForm.value,
+          proxied: true,
+          ttl: 3600,
+        }),
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        throw new Error("레코드 수정에 실패했습니다.");
+      }
+
+      setEditingRecord(null);
+      fetchRecords();
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const startEditing = (record) => {
+    setEditingRecord(record);
+    setEditForm({
+      type: record.record_type,
+      value: record.record_value,
+    });
+  };
+
+  const cancelEditing = () => {
+    setEditingRecord(null);
+    setEditForm({ type: "", value: "" });
+  };
+
   if (!isAuthenticated) {
     return <Navigate to="/signin" replace />;
   }
@@ -246,19 +311,56 @@ const ManageRecord = () => {
 
         <RecordList>
           {records.map((record, index) => (
-            <RecordItem key={index}>
-              <RecordType>{record.record_type}</RecordType>
-              <RecordValue>{record.record_value}</RecordValue>
-              <Button
-                variant="delete"
-                onClick={() => {
-                  console.log(record);
-                  handleDelete(record.record_name, record.record_type);
-                }}
-              >
-                삭제
-              </Button>
-            </RecordItem>
+            <React.Fragment key={index}>
+              <RecordItem>
+                <RecordType>{record.record_type}</RecordType>
+                <RecordValue>{record.record_value}</RecordValue>
+                <div>
+                  <EditButton
+                    type="button"
+                    onClick={() => startEditing(record)}
+                    disabled={editingRecord !== null}
+                  >
+                    수정
+                  </EditButton>
+                  <Button
+                    variant="delete"
+                    onClick={() => {
+                      handleDelete(record.record_name, record.record_type);
+                    }}
+                    disabled={editingRecord !== null}
+                  >
+                    삭제
+                  </Button>
+                </div>
+              </RecordItem>
+              {editingRecord?.record_name === record.record_name && (
+                <EditForm onSubmit={handleEdit}>
+                  <Select
+                    value={editForm.type}
+                    onChange={(e) =>
+                      setEditForm({ ...editForm, type: e.target.value })
+                    }
+                  >
+                    <option value="A">A</option>
+                    <option value="AAAA">AAAA</option>
+                    <option value="CNAME">CNAME</option>
+                    <option value="TXT">TXT</option>
+                  </Select>
+                  <Input
+                    value={editForm.value}
+                    onChange={(e) =>
+                      setEditForm({ ...editForm, value: e.target.value })
+                    }
+                    placeholder="레코드 값 입력"
+                  />
+                  <Button type="submit">저장</Button>
+                  <Button type="button" onClick={cancelEditing}>
+                    취소
+                  </Button>
+                </EditForm>
+              )}
+            </React.Fragment>
           ))}
           {records.length === 0 && (
             <RecordItem>
