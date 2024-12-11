@@ -229,7 +229,7 @@ const ManageRecord = () => {
             <option value="A">A</option>
             <option value="AAAA">AAAA</option>
             <option value="CNAME">CNAME</option>
-            <option value="MX">MX</option>
+            {/* <option value="MX">MX</option> */}
             <option value="TXT">TXT</option>
           </Select>
           <Input
