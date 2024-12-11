@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { Colors } from "../constants/Colors";
+import { Colors } from "../../constants/Colors";
 
 const ButtonContainer = styled.div`
   width: 20%;
