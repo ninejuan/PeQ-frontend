@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Outlet } from "react-router-dom";
 import Header from "../components/common/Header";
 import Footer from "../components/common/Footer";
+
 const MenuLayoutContainer = styled.div`
   width: 100%;
   height: 100%;

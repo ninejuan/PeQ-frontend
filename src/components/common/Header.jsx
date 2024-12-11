@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
-import Logo from "../../assets/logo/1024Logo.svg";
+import Logo from "/peq_logo.svg";
 import Cookies from "js-cookie";
 
 const HeaderContainer = styled.div`
   padding: 20px;
-  background-color: #fff;
+  background-color: #1e1e1e;
   border-bottom: 1px solid #ededed;
   color: #0e0e0e;
   font-size: 22px;
@@ -30,8 +30,8 @@ const HeaderItem = styled.div`
 `;
 
 const HeaderItemImg = styled.img`
-  width: 70px;
-  height: 70px;
+  width: 75px;
+  height: 75px;
   margin: 0;
   @media (max-width: 767px) {
     width: 50px;

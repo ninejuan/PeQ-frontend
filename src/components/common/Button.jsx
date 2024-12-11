@@ -2,9 +2,9 @@ import styled, { css } from "styled-components";
 import { Colors } from "../../constants/Colors";
 
 const ButtonContainer = styled.div`
-  width: 20%;
-  height: 50px;
-  border-radius: 8px;
+  width: 15%;
+  height: 40px;
+  border-radius: 6px;
 
   display: flex;
   justify-content: center;
@@ -18,7 +18,7 @@ const ButtonContainer = styled.div`
 `;
 
 const ButtonText = styled.div`
-  font-size: 18px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -33,7 +33,7 @@ const getButtonStyle = (type) => {
   if (type == "btn") {
     return css`
       background-color: ${Colors.PRIMARY};
-      color: #000;
+      color: black !important;
     `;
   } else {
     return css`

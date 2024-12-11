@@ -1,14 +1,18 @@
 import "./App.css";
 import { Outlet } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
+import { Colors } from "./constants/Colors";
 
 const GlobalStyle = createGlobalStyle`
   * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
     font-family: "Noto Sans KR", "Pretendard Variable", Pretendard, sans-serif;
   }
 
   body {
+    background-color: ${Colors.BACKGROUND};
     display: block;
   }
 `;

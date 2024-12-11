@@ -3,12 +3,13 @@ import Button from "./Button";
 import { useNavigate } from "react-router-dom";
 import { Colors } from "../../constants/Colors";
 
-const Footer = styled.div`
+const FooterContainer = styled.div`
   width: 100%;
   height: 81px;
   border-top: 1px solid #ededed;
   display: flex;
-  background-color: #fff;
+  background-color: ${Colors.BACKGROUND};
+  color: ${Colors.TEXT};
   padding: 0 20px; // 모바일에서 좌우 여백
 
   @media (max-width: 767px) {
@@ -37,22 +38,23 @@ const FooterItemText = styled.div`
 
 const Emphasis = styled.strong`
   color: ${Colors.SECONDARY};
+  cursor: pointer;
 `;
 
 function Footer() {
   const navigate = useNavigate();
   return (
-    <Footer>
+    <FooterContainer>
       <FooterItem>
         <FooterItemText>
           Copyright 2024{" "}
-          <Emphasis onClick={() => navigate("https://juany.dev")}>
+          <Emphasis onClick={() => window.open("https://juany.dev")}>
             Juan Lee
           </Emphasis>
           , All rights reserved.
         </FooterItemText>
       </FooterItem>
-    </Footer>
+    </FooterContainer>
   );
 }
 
