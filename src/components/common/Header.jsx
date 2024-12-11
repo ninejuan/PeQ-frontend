@@ -3,11 +3,12 @@ import Button from "./Button";
 import { useNavigate } from "react-router-dom";
 import Logo from "/peq_logo.svg";
 import Cookies from "js-cookie";
+import { Colors } from "../../constants/Colors";
 
 const HeaderContainer = styled.div`
   padding: 20px;
-  background-color: #1e1e1e;
-  border-bottom: 1px solid #ededed;
+  background-color: ${Colors.BACKGROUND};
+  border-bottom: 1px solid ${Colors.BORDER};
   color: #0e0e0e;
   font-size: 22px;
   font-style: normal;
