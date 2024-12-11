@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
+import Main from "./pages/main";
 import MenuLayout from "./layouts/MenuLayouts";
 import GoogleSignIn from "./pages/signin";
 import DomainRegister from "./pages/domain/register";
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
         element: <MenuLayout />,
         children: [
           {
+            path: "",
+            element: <Main />,
+          },
+          {
             path: "signin",
             element: <GoogleSignIn />,
           },
@@ -23,11 +28,11 @@ const router = createBrowserRouter([
             element: <DomainRegister />,
           },
           {
-            path: "domain/manage/:domain",
+            path: "domains",
             element: <ManageRecord />,
           },
           {
-            path: "domain/manage",
+            path: "domain/manage/:domain",
             element: <ManageRecord />,
           },
         ],
