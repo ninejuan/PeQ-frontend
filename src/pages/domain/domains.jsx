@@ -204,24 +204,23 @@ const Domains = () => {
       }
 
       const data = await response.json();
-      
+
       // 모든 도메인 정보를 병렬로 가져오기
-      const domainPromises = data.domains.map(domain => 
+      const domainPromises = data.domains.map((domain) =>
         fetch(`${Properties.API_URL}/domain/info/${domain}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
           credentials: "include",
-        }).then(res => res.json())
+        }).then((res) => res.json())
       );
 
       const domainInfos = await Promise.all(domainPromises);
-      console.log('Domain infos:', domainInfos);
+      console.log("Domain infos:", domainInfos);
       setDomains(domainInfos);
-
     } catch (err) {
-      console.error('Error fetching domains:', err);
+      console.error("Error fetching domains:", err);
       setError(err.message);
     } finally {
       setLoading(false);
