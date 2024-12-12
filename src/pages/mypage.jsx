@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Colors } from "../constants/Colors";
 import { Properties } from "../constants/Properties";
@@ -113,6 +113,8 @@ const InfoValue = styled.span`
 `;
 
 const MyPage = () => {
+  const navigate = useNavigate();
+
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -168,7 +170,7 @@ const MyPage = () => {
 
       <StatsCard
         style={{ cursor: "pointer" }}
-        onClick={() => (window.location.href = "/domains")}
+        onClick={() => navigate("/domains")}
       >
         <StatIcon>D</StatIcon>
         <StatInfo>

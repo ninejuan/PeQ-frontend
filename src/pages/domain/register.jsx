@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import { Colors } from "../../constants/Colors";
 import { Properties } from "../../constants/Properties";
 import Cookies from "js-cookie";
@@ -125,6 +126,7 @@ const RegisterButton = styled(Button)`
 `;
 
 const DomainRegister = () => {
+  const navigate = useNavigate();
   const [subdomain, setSubdomain] = useState("");
   const [isAvailable, setIsAvailable] = useState(null);
   const [isChecking, setIsChecking] = useState(false);
