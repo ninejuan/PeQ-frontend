@@ -84,11 +84,11 @@ const Main = () => {
         transition={{ duration: 0.6, delay: 0.2 }}
       >
         간편하고 직관적인 도메인 관리 솔루션을 경험해보세요. DNS 레코드 관리부터
-        서브도메인 설정까지, 모든 것을 한 곳에서 관리할 수 있습니다.
+        서브도메인 설정까지. 모든 것을 한 곳에서 관리할 수 있습니다.
       </Description>
 
       <Button
-        onClick={() => navigate("/domain/manage")}
+        onClick={() => navigate("/domains")}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
