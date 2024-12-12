@@ -5,6 +5,7 @@ import MenuLayout from "./layouts/MenuLayouts";
 import GoogleSignIn from "./pages/signin";
 import DomainRegister from "./pages/domain/register";
 import ManageRecord from "./pages/domain/manageRecord";
+import Domains from "./pages/domain/domains";
 
 const router = createBrowserRouter([
   {
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
           },
           {
             path: "domains",
-            element: <ManageRecord />,
+            element: <Domains />,
           },
           {
             path: "domain/manage/:domain",
