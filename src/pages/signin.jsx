@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import styled, { createGlobalStyle } from "styled-components";
 import { Colors } from "../constants/Colors";
@@ -84,6 +84,7 @@ const GoogleButton = styled.button`
 `;
 
 const GoogleSignIn = () => {
+  const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -97,7 +98,7 @@ const GoogleSignIn = () => {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = `${Properties.API_URL}/auth/google`;
+    navigate(`${Properties.API_URL}/auth/google`);
   };
 
   const handleRedirect = async () => {
@@ -144,7 +145,7 @@ const GoogleSignIn = () => {
           {isLoggedIn ? (
             <div>
               <p style={{ fontSize: "20px" }}>로그인된 상태입니다.</p>
-              <Navigate to="/" />
+              <Navigate to="/domains" />
             </div>
           ) : (
             <GoogleButton onClick={handleGoogleLogin}>
