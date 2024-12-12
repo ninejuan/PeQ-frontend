@@ -98,7 +98,8 @@ const GoogleSignIn = () => {
   };
 
   const handleGoogleLogin = () => {
-    redirect(`${Properties.API_URL}/auth/google`);
+    window.open(`${Properties.API_URL}/auth/google`, "_self");
+    // redirect(`${Properties.API_URL}/auth/google`);
   };
 
   const handleRedirect = async () => {
