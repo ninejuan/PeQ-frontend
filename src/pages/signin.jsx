@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, redirect, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import styled, { createGlobalStyle } from "styled-components";
 import { Colors } from "../constants/Colors";
@@ -98,7 +98,7 @@ const GoogleSignIn = () => {
   };
 
   const handleGoogleLogin = () => {
-    navigate(`${Properties.API_URL}/auth/google`);
+    redirect(`${Properties.API_URL}/auth/google`);
   };
 
   const handleRedirect = async () => {
