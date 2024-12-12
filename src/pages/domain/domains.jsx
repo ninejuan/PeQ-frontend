@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Colors } from "../../constants/Colors";
 import { Properties } from "../../constants/Properties";
@@ -167,6 +167,8 @@ const EmptyStateText = styled.p`
 `;
 
 const Domains = () => {
+  const navigate = useNavigate();
+
   const [domains, setDomains] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -263,9 +265,7 @@ const Domains = () => {
             <DomainRow
               key={index}
               onClick={() =>
-                (window.location.href = `/domain/manage/${
-                  domain?.subdomain_name || ""
-                }`)
+                navigate(`/domain/manage/${domain?.subdomain_name || ""}`)
               }
               to={`/domain/manage/${domain?.subdomain_name || ""}`}
               style={{ cursor: "pointer" }}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Navigate } from "react-router-dom";
+import { useParams, Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Colors } from "../../constants/Colors";
 import { Properties } from "../../constants/Properties";
@@ -117,6 +117,8 @@ const EditForm = styled.form`
 `;
 
 const ManageRecord = () => {
+  const navigate = useNavigate();
+
   const { domain } = useParams();
   const [records, setRecords] = useState([]);
   const [loading, setLoading] = useState(true);
