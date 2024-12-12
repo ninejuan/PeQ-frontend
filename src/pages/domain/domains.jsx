@@ -167,13 +167,14 @@ const EmptyStateText = styled.p`
 `;
 
 const Domains = () => {
-  const [domains, setDomains] = useState([]);
+  const [domains, setDomains] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   useEffect(() => {
     fetchDomains();
+    console.log(`domains: ${domains}`);
   }, []);
 
   const fetchDomains = async () => {
@@ -203,8 +204,24 @@ const Domains = () => {
       }
 
       const data = await response.json();
-      setDomains(data.domains || []);
+      
+      // 모든 도메인 정보를 병렬로 가져오기
+      const domainPromises = data.domains.map(domain => 
+        fetch(`${Properties.API_URL}/domain/info/${domain}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          credentials: "include",
+        }).then(res => res.json())
+      );
+
+      const domainInfos = await Promise.all(domainPromises);
+      console.log('Domain infos:', domainInfos);
+      setDomains(domainInfos);
+
     } catch (err) {
+      console.error('Error fetching domains:', err);
       setError(err.message);
     } finally {
       setLoading(false);
