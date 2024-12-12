@@ -1,61 +1,59 @@
+import React from "react";
 import styled from "styled-components";
-import Button from "./Button";
-import { useNavigate } from "react-router-dom";
 import { Colors } from "../../constants/Colors";
 
-const FooterContainer = styled.div`
+const FooterWrapper = styled.footer`
   width: 100%;
-  height: 81px;
-  border-top: 1px solid #ededed;
-  display: flex;
-  background-color: ${Colors.BACKGROUND};
-  color: ${Colors.TEXT};
-  padding: 0 20px; // 모바일에서 좌우 여백
+  background-color: ${Colors.BACKGROUND_SECONDARY};
+  padding: 24px 0;
+  margin-top: auto; // 이 부분이 중요합니다
+`;
 
-  @media (max-width: 767px) {
-    padding: 0 10px;
+const FooterContent = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Copyright = styled.p`
+  color: ${Colors.TEXT_SECONDARY};
+  font-size: 14px;
+`;
+
+const Links = styled.div`
+  display: flex;
+  gap: 24px;
+`;
+
+const Link = styled.a`
+  color: ${Colors.TEXT_SECONDARY};
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+
+  &:hover {
+    color: ${Colors.TEXT};
   }
 `;
 
-const FooterItem = styled.div`
-  flex: 1;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`;
-
-const FooterItemText = styled.div`
-  font-size: 15px;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: -0.12px;
-  font-weight: 700;
-
-  ${(props) => props.$customStyle}
-`;
-
-const Emphasis = styled.strong`
-  color: ${Colors.SECONDARY};
-  cursor: pointer;
-`;
-
-function Footer() {
-  const navigate = useNavigate();
+const Footer = () => {
   return (
-    <FooterContainer>
-      <FooterItem>
-        <FooterItemText>
-          Copyright 2024{" "}
-          <Emphasis onClick={() => window.open("https://juany.dev")}>
-            Juan Lee
-          </Emphasis>
-          , All rights reserved.
-        </FooterItemText>
-      </FooterItem>
-    </FooterContainer>
+    <FooterWrapper>
+      <FooterContent>
+        <Copyright>© 2024 Juan Lee. All rights reserved.</Copyright>
+        <Links>
+          <Link href="/privacy">개인정보처리방침</Link>
+          <Link href="/terms">이용약관</Link>
+          <Link href="https://github.com/ninejuan" target="_blank">
+            GitHub
+          </Link>
+        </Links>
+      </FooterContent>
+    </FooterWrapper>
   );
-}
+};
 
 export default Footer;

@@ -1,22 +1,31 @@
-import styled from "styled-components";
+import React from "react";
 import { Outlet } from "react-router-dom";
+import styled from "styled-components";
 import Header from "../components/common/Header";
 import Footer from "../components/common/Footer";
 
-const MenuLayoutContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  overflow-x: hidden; // 가로 스크롤 방지
+const LayoutWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 `;
 
-function MenuLayout() {
-  return (
-    <MenuLayoutContainer>
-      <Header></Header>
-      <Outlet></Outlet>
-      <Footer></Footer>
-    </MenuLayoutContainer>
-  );
-}
+const Content = styled.main`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+`;
 
-export default MenuLayout;
+const MenuLayouts = () => {
+  return (
+    <LayoutWrapper>
+      <Header />
+      <Content>
+        <Outlet />
+      </Content>
+      <Footer />
+    </LayoutWrapper>
+  );
+};
+
+export default MenuLayouts;
